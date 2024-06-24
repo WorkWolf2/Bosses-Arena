@@ -1,0 +1,73 @@
+#####################################
+####### PLUGIN MADE BY WOLF #########
+#####################################
+
+# Plugin docs: https://docs.minegolem.com/
+# Sounds enum list: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html
+
+# Set global SpawnPoint
+# Is a location where player will teleport to if they do not have a spawn point
+globalspawnpoint:
+  world: unset
+  x: 0
+  y: 0
+  z: 0
+  yaw: 0
+  pitch: 0
+
+# Do you want to use a key to enter to the boss or use command?
+use-key: true
+
+# Do you want the title when you enter the boss room?
+use-title: true
+
+# Title and subtitle
+end-title:
+  title: ""
+  subtitle: ""
+
+# Set the time (in seconds) it takes to exit the boss room after killing the boss
+end-time: 5
+
+# The sound when a player enter an Arena
+enter-sound: UI_TOAST_CHALLENGE_COMPLETE
+
+
+
+# MESSAGES
+
+prefix: "<bold><gradient:#A26D0A:#560000>BossesArena</gradient></bold> <gray>| "
+
+no-arena: "<gray>There is no arena by this name!"
+no-arenas: "<gray>There are no set arenas! Set one first!"
+no-name: "<gray>Remember to write down the name of the arena"
+setkeylock: "<gray>keylock has been activated!"
+already-keylock: "<gray>the keylock is already started!"
+regionsetter: "<gray>Use the left key to set the lower block and the right key to set the upper block!"
+already-regionsetter: "<gray>region setter is already started!"
+already-region: "<gray>The region of this arena is already set up!"
+bossroom-done: "<gray>The dungeon will conclude in <time> seconds!"
+already-arena: "<gray>The arena already exists!"
+created-arena: "<gray>The arena has been successfully created!"
+setted-location: "<gray>Location successfully set up!"
+removed-lock: "<gray>The lock on the arena has been successfully removed!"
+no-perms: "<gray>You do not have sufficient permissions to run this command!"
+offline-player: "<gray>This player is offline!"
+gave-key: "<gray>You have been given <quantity> key(s)."
+inventory-full: "<gray>A key has been given to you, but you have a full inventory. Remember to empty it!"
+first-position: "<gray>First position set successfully!"
+second-position: "<gray>Second position set successfully!"
+successfully-region: "<gray>Region set successfully!"
+impossible-to-create-region: "<gray>Unable to create region. Check the points."
+different-worlds: "<gray>You selected two points in different dimensions. Please reselect them."
+disabled-function: "<gray>This function has been disabled by config!"
+left-click: "<gray>Use the left click to execute this action!"
+reload-completed: "<gray>Reload completed"
+deleted-arena-success: "<gray>Arena successfully eliminated"
+deleted-arena-fail: "<gray>Unable to delete arena"
+successfully-mob: "<gray>Mob set successfully!"
+
+# PLACEHOLDER MESSAGES
+
+true: "&a&lTRUE"
+false: "&c&lFALSE"

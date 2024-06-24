@@ -1,0 +1,12 @@
+name: BossesArena
+version: '${version}'
+main: me.workwolf.bossesarena.BossesArena
+api-version: '1.18'
+depend: [MythicMobs, PlaceholderAPI]
+commands:
+  ba:
+    description: Admin Command
+    aliases:
+      - bossesarena
+      - barena
+      - bossa

@@ -1,0 +1,114 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'me.workwolf'
+version = '1.1'
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://repo.papermc.io/repository/maven-public/"
+    }
+    maven {
+        name 'sonatype'
+        url 'https://oss.sonatype.org/content/groups/public/'
+    }
+    maven {
+        name 'phoenix'
+        url 'https://nexus.phoenixdevt.fr/repository/maven-public/'
+    }
+    maven { url 'https://mvn.lumine.io/repository/maven-public/' }
+    maven {
+        name 'snakeyaml'
+        url 'https://mvnrepository.com/artifact/org.yaml/snakeyaml'
+    }
+    maven {
+        name 'papi-repo'
+        url 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
+    }
+    maven {
+        url 'https://jitpack.io'
+    }
+}
+
+dependencies {
+    implementation group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.2'
+    implementation group: 'org.bstats', name: 'bstats-base', version: '3.0.2'
+    implementation 'org.jetbrains:annotations:23.0.0'
+    compileOnly 'io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT'
+    compileOnly 'io.lumine:MythicLib-dist:1.6.2-SNAPSHOT'
+    compileOnly 'io.lumine:Mythic-Dist:5.6.1'
+    compileOnly 'net.Indyuce:MMOCore-API:1.12.1-SNAPSHOT'
+    compileOnly group: 'org.yaml', name: 'snakeyaml', version: '2.0'
+    implementation group: 'com.jeff-media', name: 'custom-block-data', version: '2.2.2'
+    compileOnly group: 'me.clip', name: 'placeholderapi', version: '2.11.6'
+    implementation('com.github.kangarko:Foundation:6.7.14') {
+        exclude group: 'org.mineacademy.plugin', module: 'AuthMe'
+        exclude group: 'org.mineacademy.plugin', module: 'BentoBox'
+        exclude group: 'org.mineacademy.plugin', module: 'CitizensAPI'
+        exclude group: 'org.mineacademy.plugin', module: 'CMIAPI'
+        exclude group: 'org.mineacademy.plugin', module: 'DiscordSRV'
+        exclude group: 'org.mineacademy.plugin', module: 'EssentialsX'
+        exclude group: 'org.mineacademy.plugin', module: 'Factions'
+        exclude group: 'org.mineacademy.plugin', module: 'FactionsUUID'
+        exclude group: 'org.mineacademy.plugin', module: 'MassiveCore'
+        exclude group: 'org.mineacademy.plugin', module: 'mcMMO'
+        exclude group: 'org.mineacademy.plugin', module: 'MultiverseCore'
+        exclude group: 'org.mineacademy.plugin', module: 'MythicMobs'
+        exclude group: 'org.mineacademy.plugin', module: 'NuVotifier'
+        exclude group: 'org.mineacademy.plugin', module: 'PlaceholderAPI'
+        exclude group: 'org.mineacademy.plugin', module: 'ProtocolLib'
+        exclude group: 'org.mineacademy.plugin', module: 'Residence'
+        exclude group: 'org.mineacademy.plugin', module: 'SimpleClans'
+        exclude group: 'org.mineacademy.plugin', module: 'Towny'
+        exclude group: 'org.mineacademy.plugin', module: 'TownyChat'
+        exclude group: 'org.mineacademy.plugin', module: 'Vault'
+        exclude group: 'org.mineacademy.plugin', module: 'WorldEdit'
+        exclude group: 'org.mineacademy.plugin', module: 'WorldGuard'
+        exclude group: 'org.bukkit', module: 'bukkit'
+        exclude group: 'org.spigotmc', module: 'spigot'
+    }
+}
+
+shadowJar {
+    dependencies {
+        include(dependency('com.github.kangarko:Foundation'))
+        include(dependency('org.bstats:bstats-bukkit'))
+        include(dependency('org.bstats:bstats-base'))
+        include(dependency('com.jeff-media:custom-block-data'))
+    }
+
+    relocate 'com.jeff_media.customblockdata', 'me.workwolf.bossesarena.customblockdata'
+    relocate 'org.bstats', 'me.workwolf.bossesarena.bstats'
+    relocate 'org.mineacademy.fo', 'me.workwolf.bossesarena.foundation'
+}
+
+build.dependsOn("shadowJar")
+
+def targetJavaVersion = 17
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        options.release = targetJavaVersion
+    }
+
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
