@@ -1,0 +1,24 @@
+#####################################
+####### MINEGOLEM PRODUCTION ########
+#####################################
+
+# Plugin docs: https://docs.minegolem.com/
+# Sounds enum list: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html
+
+arena:
+  # The sound when a player enter an Arena
+  enter-sound: UI_TOAST_CHALLENGE_COMPLETE
+
+  # Do you want to use a key to enter to the boss or use command?
+  use-key: true
+
+  # Set the time (in seconds) it takes to exit the boss room (after killing the boss)
+  end-time: 5
+
+  # Do you want the title when you enter the boss room?
+  use-title: true
+
+  # Set the end-title if the use-title option is true
+  end-title:
+    title: ""
+    subtitle: ""

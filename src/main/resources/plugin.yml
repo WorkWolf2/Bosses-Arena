@@ -1,0 +1,12 @@
+name: BossesArena
+version: '2.0'
+main: com.minegolem.bossesArena.BossesArena
+api-version: '1.18'
+authors: [ WorkWolf_2 ]
+depend:
+  - MythicMobs
+  - Vault
+  - PlaceholderAPI
+softdepend:
+  - MMOCore
+  - Oraxen
